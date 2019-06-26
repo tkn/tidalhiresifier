@@ -1,0 +1,17 @@
+{
+  "name": "tidalhiresifier",
+  "version": "1.0.1",
+  "description": "Utility script that checks if any of your Tidal favorites are availalbe in hi-res.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkn/tidal.git"
+  },
+  "license": "Unlicense",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "cli-progress": "^2.1.1",
+    "dotenv": "^8.0.0",
+    "tidal-api-wrapper": "^1.7.0",
+    "top-level-await": "^1.1.0"
+  }
+}
