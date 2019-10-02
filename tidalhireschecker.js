@@ -2,7 +2,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-const Tidal = require('tidal-api-wrapper');
+const Tidal = require('tidal-api-wrapper/dist');
 const tidal = new Tidal({ countryCode: "DK" });
 
 const Progress = require('cli-progress');
@@ -37,7 +37,7 @@ if (!process.argv.includes("-a")) {
     }
 
     var res = [];
-    bar.start(albumsNotHQ.length,0);
+    bar.start(albumsNotHQ.length, 0);
     for (let album of albumsNotHQ) {
         var altAlbums = await tidal.search(sanitize(album.title), 'albums', 10)
             .then((result) => {
@@ -47,7 +47,7 @@ if (!process.argv.includes("-a")) {
             });
 
         for (let altAlbum of altAlbums) {
-            if (isHiRes(altAlbum) && sameAlbum(album,altAlbum)) {
+            if (isHiRes(altAlbum) && sameAlbum(album, altAlbum)) {
                 res.push(album);
                 break;
             }
@@ -121,12 +121,12 @@ console.log("END");
 
 async function findTracksWithHQAlts(tracks) {
     var res = [];
-    bar.start(tracks.length,0);
+    bar.start(tracks.length, 0);
     for (let track of tracks) {
 
-        if(TRACK_CACHE[track.id]) {
+        if (TRACK_CACHE[track.id]) {
             res.push(track);
-        } else if(TRACK_CACHE[track.id] !== false) {
+        } else if (TRACK_CACHE[track.id] !== false) {
             TRACK_CACHE[track.id] = false;
 
             var altTracks = await tidal.search(sanitize(track.title), 'tracks', MAX_RESULTS)
@@ -157,11 +157,11 @@ async function findTracksWithHQAlts(tracks) {
 }
 
 function sameAlbum(album, altAlbum) {
-    return isFuzzyMatch(album.title,altAlbum.title)&& isFuzzyMatch(album.artist.name,altAlbum.artist.name);
+    return isFuzzyMatch(album.title, altAlbum.title) && isFuzzyMatch(album.artist.name, altAlbum.artist.name);
 }
 
 function sameTrack(track, altTrack) {
-    return isFuzzyMatch(track.title,altTrack.title) && isFuzzyMatch(track.artist.name,altTrack.artist.name) && (Math.abs(track.duration - altTrack.duration) < 7)
+    return isFuzzyMatch(track.title, altTrack.title) && isFuzzyMatch(track.artist.name, altTrack.artist.name) && (Math.abs(track.duration - altTrack.duration) < 7)
 }
 
 function isFuzzyMatch(s1, s2) {
@@ -173,5 +173,5 @@ function isHiRes(track) {
 }
 
 function sanitize(s) {
-    return s.replace(/#|’|\(.*?emaster.*?\)/gi,"");
+    return s.replace(/#|’|\(.*?emaster.*?\)/gi, "");
 }
