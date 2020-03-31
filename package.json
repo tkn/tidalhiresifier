@@ -11,7 +11,7 @@
         "chalk": "^2.4.2",
         "cli-progress": "^2.1.1",
         "dotenv": "^8.2.0",
-        "tidal-api-wrapper": "github:tkn/tidal-api",
+        "tidal-api-wrapper": "^1.7.1",
         "top-level-await": "^1.1.0"
     }
 }

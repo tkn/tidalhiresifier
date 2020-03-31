@@ -2,7 +2,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-const Tidal = require('tidal-api-wrapper/dist');
+const Tidal = require('tidal-api-wrapper');
 const tidal = new Tidal({ countryCode: "DK" });
 
 const Progress = require('cli-progress');
@@ -16,6 +16,8 @@ const TIDAL_PASS = process.env.TIDAL_PASSWORD;
 const MAX_RESULTS = 10;
 
 const TRACK_CACHE = {};
+
+tidal.webToken = "kgsOOmYk3zShYrNP";
 
 if (!process.argv.includes("-a")) {
     console.log(chalk.blueBright("\nScanning albums..."));
